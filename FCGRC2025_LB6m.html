@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="es">  
+<head>
+    <meta charset="UTF-8">
+    <title>FCGRC Análisis de contribuciones</title>
+    <style>
+        body {
+            background: #fff;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 0 0 40px 0;
+        }
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding-top: 20px;
+            margin-bottom: 20px;
+        }
+        .logo-row {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            margin-top: 40px;
+        }
+        .logo-row img {
+            width: 100%;  /* ¡La clave para que la imagen ocupe todo el ancho de .logo-row! */
+            height: auto; /* Mantiene la proporción de la imagen */
+            display: block; /* Opcional pero recomendado */
+        }
+        .title-row {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .main-title {
+            font-size: 2.5em;
+            color: #111;
+            font-weight: bold;
+            line-height: 1.2;
+            margin: 0;
+            word-break: break-word;
+        }
+        .section-title {
+            font-size: 1.8em;
+            color: #111;
+            font-weight: bold;
+            line-height: 1.4;
+            margin: 0;
+            word-break: break-word;
+            margin-bottom: 20px
+        }
+        .section-title-rojo {
+            font-size: 1.8em;
+            color: red;
+            font-weight: bold;
+            line-height: 1.4;
+            margin: 0;
+            word-break: break-word;
+            margin-bottom: 20px
+        }
+
+        .summary {
+            font-size: 1.1em;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        .seccion {
+            display: flex;
+            flex-wrap: wrap;
+            background: #fff;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            /*box-shadow: 0 2px 8px rgba(0,0,0,0.05);*/
+            padding: 20px;
+        }
+
+        .tableau-section {
+            width: 900px; /* Ancho total de la sección */
+            height: 500px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: white; /*#f5f5f5 es un gris claro */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+        .tableau-section-horizontal {
+            width: 900px; /* Ancho total de la sección */
+            height: 300px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: white;/*#f5f5f5 es un gris claro */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+
+        .tableau-section-horizontal-corto {
+            width: 900px; /* Ancho total de la sección */
+            height: 250px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: white;/*#f5f5f5 es un gris claro */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+        .tableau-section-horizontal-corto-plus {
+            width: 900px; /* Ancho total de la sección */
+            height: 280px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: white;/*#f5f5f5 es un gris claro */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+        .tableau-section-horizontal-corto2 {
+            width: 900px; /* Ancho total de la sección */
+            height: 200px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: white;/*#f5f5f5 es un gris claro */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+        .tableau-section-mediano {
+            width: 900px; /* Ancho total de la sección */
+            height: 400px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: white;/*#f5f5f5 es un gris claro */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+        .tableau-section-mediano2 {
+            width: 900px; /* Ancho total de la sección */
+            height: 300px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: white;/*#f5f5f5 es un gris claro */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+        .tableau-section-mediano3 {
+            width: 900px; /* Ancho total de la sección */
+            height: 450px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: white;/*#f5f5f5 es un gris claro */
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+        .tableau-section-largo {
+            width: 900px; /* Ancho total de la sección */
+            height: 600px; /* Altura total de la sección */
+            /*margin: 0 auto 20px auto;*/
+            background: #f5f5f5;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex-direction: column; /*Este es el truco para ocultar el toolbar de Tableau*/
+        }
+
+        .tableau-section-left {
+            width: 400px;
+            height: 400px;
+            /*margin: 0 auto 20px auto;*/
+            /*background: #f5f5f5;*/
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            border: 0px solid #e0e0e0;
+            box-sizing: border-box;
+            flex: 1 1 250px; /* Ocupa el espacio restante después de que la derecha tome su base */
+            flex-direction: column;
+    
+        }
+
+        .tableau-section-right {
+            width: 350px;
+            height: 200px;
+            margin: 0 auto 20px auto;
+            /*background: #f5f5f5;*/
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            /*border: 1px solid #e0e0e0;*/
+            box-sizing: border-box;
+            flex: 1; /* Ocupa el espacio restante después de que la derecha tome su base */
+            flex-direction: column; /* Apilamos los hijos verticalmente truco*/
+            border-right: 1px solid #ccc; /* Separador visual */
+
+        }
+
+        .col-izq {
+            flex: 1 1 250px;
+            min-width: 220px;
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10px;
+        }
+        .col-izq-texto {
+            flex: 0 20px;
+            min-width: 220px;
+            padding-right: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .col-der {
+            flex: 2 1 150px;
+            min-width: 170px;
+            flex-direction: column;
+            font-size: 1.2em;
+        }
+
+        .footer {
+            width: 600px;
+            margin: 40px auto 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .footer-logo {
+            margin-right: 20px;
+        }
+        .footer-logo img {
+            height: 150px;
+        }
+        .footer-text {
+            font-style: italic;
+            font-size: 1em;
+            color: #555;
+        }
+        .rojo-normal {
+            font-size: 1em;
+            color: red;
+        }
+        .rojo-bold {
+            font-size: 1em;
+            color: red;
+            font-weight: bold;
+        }
+        .verde-normal {
+            font-size: 1em;
+            color: green;
+        }
+        .verde-bold {
+            font-size: 1em;
+            color: green;
+            font-weight: bold;
+        }       
+        .texto-normal {
+            font-size: 1em;
+            color: #111;
+        }
+        .texto-bold {
+            font-size: 1em;
+            color: #111;
+            font-weight: bold;
+        }
+    .texto-italica-gris {
+            font-size: 1em;
+            color: gray;
+            font-style: italic;
+        } 
+
+
+        .rojo-normal-title {
+            font-size: 1.4em;
+            color: red;
+        }
+        .rojo-bold-title {
+            font-size: 1.4em;
+            color: red;
+            font-weight: bold;
+        }
+        .verde-normal-title {
+            font-size: 1.4em;
+            color: green;
+        }
+        .verde-bold-title {
+            font-size: 1.4em;
+            color: green;
+            font-weight: bold;
+        }  
+              
+        .texto-normal-title {
+            font-size: 1.4em;
+            color: #111;
+        }
+        .texto-bold-title {
+            font-size: 1.4em;
+            color: #111;
+            font-weight: bold;
+        }
+
+
+ /* 1. Estilos del Menú Superior Flotante (Contenedor Principal) */
+        .floating-top-menu {
+            position: fixed; /* Hace que el menú se quede pegado a la ventana */
+            top: 0;          /* Lo posiciona en la parte superior */
+            left: 0;         /* Lo alinea a la izquierda */
+            width: 100%;     /* Ocupa todo el ancho del navegador */
+            background-color: white; /* Color de fondo del menú */
+            color: green;    /* Color del texto */
+            font-size: 15px;
+            font-family: Arial;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Sombra para que destaque */
+            z-index: 1000;   /* Asegura que el menú esté por encima de otros contenidos */
+            height: 50px; /* Altura del menú */
+        }
+
+        .floating-top-menu ul {
+            list-style: none; /* Quita los puntos de la lista */
+            margin: 0;
+            padding: 0;
+            display: flex; /* Usa flexbox para alinear los ítems horizontalmente */
+            justify-content: center; /* Centra los ítems de la lista */
+        }
+
+        /* 2. Estilos para los ítems del menú principal */
+        .floating-top-menu ul li {
+            position: relative; /* ¡IMPORTANTE para posicionar los submenús! */
+            flex-grow: 1; /* Permite que los elementos crezcan para ocupar el espacio */
+            text-align: center; /* Centra el texto dentro de cada li principal */
+            min-width: 120px; /* Ancho mínimo para cada botón principal */
+        }
+
+        .floating-top-menu ul li a {
+            display: block; /* Para que el enlace ocupe todo el espacio del li */
+            color: green;
+            text-decoration: none;
+            padding: 15px 10px; /* Espaciado dentro de cada ítem del menú */
+            transition: background-color 0.3s ease;
+            /white-space: nowrap;  /*Evita que el texto se rompa en varias líneas */
+        }
+
+        .floating-top-menu ul li a:hover {
+            background-color: whitesmoke;
+            height: 18px;
+        }
+
+        /* Estilo para el icono de flecha/triángulo */
+        .floating-top-menu ul li a .dropdown-icon {
+            margin-left: 5px; /* Espacio entre texto y flecha */
+            transition: transform 0.3s ease; /* Suaviza la rotación de la flecha */
+            display: inline-block; /* Asegura que la transformación funcione correctamente */
+        }
+
+        /* Rotar la flecha cuando el menú está abierto */
+        .floating-top-menu ul li.open > a .dropdown-icon {
+            transform: rotate(180deg); /* Flecha apuntando hacia arriba */
+        }
+
+        /* 3. Estilos de los Submenús (DRIL-DOWN - Se despliegan hacia ABAJO) */
+        .floating-top-menu ul ul { /* Selecciona las listas anidadas (los submenús) */
+            background-color: white; /* Fondo diferente para el submenú */
+            position: absolute; /* Posiciona el submenú de forma absoluta */
+            top: 100%;       /* Aparece justo debajo del ítem principal */
+            left: 0;         /* Alineado con el borde izquierdo del ítem principal */
+            width: 100%;     /* Ocupa el mismo ancho que su ítem padre */
+            min-width: 180px; /* Asegura un ancho mínimo para los submenús */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 1001;
+            flex-direction: column; /* Importante: fuerza la disposición vertical de los ítems */
+            /*border-top: 3px solid #00aaff; Línea de color en la parte superior */
+
+            /* Propiedades para la animación drill-down */
+            max-height: 0; /* Inicialmente oculto (altura 0) */
+            overflow: hidden; /* Oculta el contenido que se desborda */
+            transition: max-height 0.3s ease-in-out; /* Animación de apertura/cierre */
+        }
+
+        /* Mostrar el submenú cuando el LI padre tiene la clase 'open' */
+        .floating-top-menu ul li.open > ul {
+            max-height: 400px; /* Una altura lo suficientemente grande para mostrar el contenido */
+            /* Si el contenido es muy dinámico, puedes estimar una max-height generosa o usar JS para calcularla. */
+        }
+
+        /* Estilos para los enlaces dentro del submenú */
+        .floating-top-menu ul ul li {
+            text-align: left; /* Alinea el texto a la izquierda en los submenús */
+        }
+        .floating-top-menu ul ul li a {
+            padding: 10px 20px; /* Ajusta el padding para los ítems del submenú */
+            background-color: white; /* Asegura el color de fondo */
+            border-bottom: 1px solid #555; /* Separador entre ítems del submenú */
+        }
+        .floating-top-menu ul ul li:last-child a {
+            border-bottom: none; /* Elimina el borde del último ítem */
+        }
+
+        .floating-top-menu ul ul li a:hover {
+            background-color: whitesmoke; /* Color de hover diferente para el submenú */
+            
+            /* Puedes quitar el border-left que teníamos si no encaja con el diseño horizontal 
+            border-left: 5px solid #00aaff;*/
+        }
+
+        /* Si quieres sub-submenús, se comportarían como "fly-out" a la derecha, manteniendo la posición absoluta */
+        .floating-top-menu ul ul ul {
+            left: 100%;
+            top: 0;
+            background-color: white; /* Otro color para diferenciar */
+            /*border-top: 3px solid #00aaff;*/
+            /* También tendrían max-height: 0; y overflow: hidden; */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out;
+        }
+        .floating-top-menu ul ul li.open > ul {
+             max-height: 500px; /* Asegura que el sub-submenú también se despliegue */
+        }
+        .floating-top-menu ul ul ul li a {
+            background-color: white;
+            text-align: left;
+        }
+        .floating-top-menu ul ul ul li a:hover {
+            background-color: white;
+           /* border-left: 5px solid #00aaff;*/
+        }
+    </style>
+
+    <link rel="icon" href="img/logo_pes.png" type="image/x-icon">
+</head>
+
+
+<body>
+    <div class="logo-row" id="Inicio">
+        <img src="img/logo3.png" alt="Logo">
+    </div>
+
+
+    <nav class="floating-top-menu">
+        <ul>
+            <li><a href="#Inicio"><img src="img/logo_pes.png" height="30"></a></li>
+            <li>
+                <a href="#" class="dropdown-toggle">
+                    Línea de base y marco muestral<span class="dropdown-icon">▼</span>
+                </a>
+                <ul>
+                    <li><a href="#Línea de base y marco muestral">Población y muestra</a></li>
+                    <li><a href="#CarHogares">Características de hogares y viviendas</a></li>
+                    <li><a href="#CarPersonas">Características de las personas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="dropdown-toggle">
+                    Resultados estratégicos <span class="dropdown-icon">▼</span>
+                </a>
+                <ul>
+                    <li><a href="#Tejido">Tejido social fortalecido</a></li>
+                    <li><a href="#Confianza">Confianza interpersonal</a></li>
+                    <li><a href="#Bienes">Participación ciudadana</a></li>
+                    <li><a href="#Circuitos">Circuitos locales productivos</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" class="dropdown-toggle">
+                    Calidad de vida <span class="dropdown-icon">▼</span>
+                </a>
+                <ul>
+                    <li><a href="#Ingresosygastos">Ingresos y gastos</a></li>
+                    <li><a href="#PobrezaSubjetiva">Pobreza subjetiva</a></li>
+                    <li><a href="#IPM">Pobreza multidimensional (IPM)</a></li>
+                    <li><a href="#InseguridadAlimentaria">Inseguridad alimentaria</a></li>
+                    <li><a href="#IndiceConfianza">Índice de confianza</a></li>
+                </ul>
+            </li>
+            <li><a href="#PerImpacto">Percepción de Impacto</a></li>
+        </ul>
+    </nav>
+
+
+<div class="container">
+        <div class="header" >
+
+            <div class="title-row">
+                <h1 class="main-title">
+                    Análisis de contribuciones en<br>
+                    Bugalagrande, Florida, Zarzal,<br>
+                    Pradera, Miranda y Corinto
+                </h1>
+            </div>
+            <div class="summary">
+                Agosto de 2025.
+            </div>
+        </div>
+
+
+       
+    <div class="seccion" id="Línea de base y marco muestral">
+
+        <h2 class="section-title">Línea de base y marco muestral</h2>
+                   
+        <div class="tableau-section">
+            
+            <div class='tableauPlaceholder' id='viz1753292506409' style='position: relative'>
+                <noscript>
+                    <a href='#'><img alt='D01 Entrevistados ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D01Entrevistados&#47;D01Entrevistados&#47;1_rss.png' style='border: none' />
+                    </a>
+                </noscript>
+                <object class='tableauViz'  style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                    <param name='embed_code_version' value='3' /> 
+                    <param name='site_root' value='' />
+                    <param name='name' value='FCGRC_LB6m2_D01Entrevistados&#47;D01Entrevistados' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D01Entrevistados&#47;D01Entrevistados&#47;1.png' /> 
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='es-ES' />
+                </object>
+            </div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753292506409');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='527px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                     
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script> 
+
+        </div>
+    </div>
+
+    <div class="seccion" id="Entrevistas">
+        <h3>Entrevistas y hogares participantes</h3>            
+        <div class="tableau-section">
+            
+            <div class='tableauPlaceholder' id='viz1756825061971' style='position: relative'><noscript><a href='#'><img alt='D02B Entrevistados por focos ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;C9&#47;C9JGYX7DZ&#47;1_rss.png' style='border: none' /></a></noscript>
+                <object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                    <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;C9JGYX7DZ' /> 
+                    <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;C9&#47;C9JGYX7DZ&#47;1.png' /> 
+                    <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+                    <script type='text/javascript'>                    var divElement = document.getElementById('viz1756825061971');                    
+                        var vizElement = divElement.getElementsByTagName('object')[0];                    
+                        if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+                        else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+                        else { vizElement.style.width='800px';vizElement.style.height='527px';}                     
+                        var scriptElement = document.createElement('script');                    
+                        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                        vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                    </script>
+   
+
+        </div>
+    </div>
+
+
+    <div class="seccion" id="CarHogares">
+        <h3 class="section-title">Características de los hogares y sus viviendas</h3> 
+        <div class="tableau-section">
+            <div class='tableauPlaceholder' id='viz1753292693633' style='position: relative'><noscript><a href='#'><img alt='D04 N4H&amp;V ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;KN&#47;KN8423D6G&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;KN8423D6G' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;KN&#47;KN8423D6G&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753292693633');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='1477px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script>
+        </div>
+    </div>
+    <div class="seccion">
+        <h3>Tenencia de bienes en los hogares</h3>
+        <div class="tableau-section-horizontal-corto">
+        <div class='tableauPlaceholder' id='viz1753292769064' style='position: relative'><noscript><a href='#'><img alt='D05 Bienes ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D05Bienes&#47;D05Bienes&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D05Bienes&#47;D05Bienes' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D05Bienes&#47;D05Bienes&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+        <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753292769064');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='510px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+        </script> 
+        </div>
+    </div>
+    <div class="seccion">
+        <h3>Servicios públicos domiciliarios</h3>
+        <div class="tableau-section">
+            <div class='tableauPlaceholder' id='viz1753292874318' style='position: relative'><noscript><a href='#'><img alt='D06 ServPub ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;94&#47;94DT6N94G&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;94DT6N94G' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;94&#47;94DT6N94G&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+            <script type='text/javascript'>                    var divElement = document.getElementById('viz1753292874318');                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+                else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+                else { vizElement.style.width='800px';vizElement.style.height='1500px';}                     
+                var scriptElement = document.createElement('script');                    
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script> 
+        </div>
+    </div>
+    <div class="seccion" id="CarPersonas">
+        <h2 class="section-title">Características de las personas</h2>
+        <h3>Distribución de la población por sexo y edad</h3>
+        <div class="tableau-section-mediano">
+            <div class='tableauPlaceholder' id='viz1753292924002' style='position: relative'><noscript><a href='#'><img alt='D08 per Ciclo Vida ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D08perCicloVida&#47;D08perCicloVida&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D08perCicloVida&#47;D08perCicloVida' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D08perCicloVida&#47;D08perCicloVida&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+                <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1753292924002');                    
+                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+                    else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+                    else { vizElement.style.width='800px';vizElement.style.height='710px';}                     
+                    var scriptElement = document.createElement('script');                    
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script>  
+        </div>
+    </div>
+
+
+
+    <div class="seccion">
+        <h3>Características sociodemográficas</h3>
+        <div class="tableau-section-horizontal">
+              <div class='tableauPlaceholder' id='viz1753293006463' style='position: relative'><noscript><a href='#'><img alt='D10 NAUTO ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D10NAUTO&#47;D10NAUTO&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D10NAUTO&#47;D10NAUTO' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D10NAUTO&#47;D10NAUTO&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+              <script type='text/javascript'>                    
+                var divElement = document.getElementById('viz1753293006463');                    
+                var vizElement = divElement.getElementsByTagName('object')[0];                    
+                if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+                else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+                else { vizElement.style.width='800px';vizElement.style.height='900px';}                     
+                var scriptElement = document.createElement('script');                    
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+              </script>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <h3>Educación y ocupación</h3>
+        <div class="tableau-section">
+              <div class='tableauPlaceholder' id='viz1753293028138' style='position: relative'><noscript><a href='#'><img alt='D11 edu ocu ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D11eduocu&#47;D11eduocu&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D11eduocu&#47;D11eduocu' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D11eduocu&#47;D11eduocu&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+              <script type='text/javascript'>                    
+                var divElement = document.getElementById('viz1753293028138');                    
+                var vizElement = divElement.getElementsByTagName('object')[0];                    
+                if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+                else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+                else { vizElement.style.width='800px';vizElement.style.height='1327px';}                     
+                var scriptElement = document.createElement('script');                    
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+              </script> 
+        </div>
+    </div>
+
+    <div class="seccion" id="Tejido">
+        <h2 class="section-title" id="ResEstrategicos">Resultados estratégicos<br><br>Tejido social fortalecido</h2>
+    
+        <div class="tableau-section-mediano3">
+            <div class='tableauPlaceholder' id='viz1753293064275' style='position: relative'><noscript><a href='#'><img alt='D12 Participación ciudadana ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D12Participacinciudadana&#47;D12Participacinciudadana&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D12Participacinciudadana&#47;D12Participacinciudadana' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D12Participacinciudadana&#47;D12Participacinciudadana&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753293064275');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='710px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script> 
+        </div>
+    </div>
+
+
+
+    <div class="seccion">
+        <div class="tableau-section-horizontal">
+            <div class='tableauPlaceholder' id='viz1753293118765' style='position: relative'><noscript><a href='#'><img alt='D14 Problemas comunidad ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D14Problemascomunidad&#47;D14Problemascomunidad&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D14Problemascomunidad&#47;D14Problemascomunidad' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D14Problemascomunidad&#47;D14Problemascomunidad&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753293118765');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='527px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script>  
+        </div>
+    </div>
+
+    <div class="seccion" id="Confianza">
+        <h2 class="section-title">Confianza interpersonal</h2>
+        <div class="tableau-section-mediano">
+            <div class='tableauPlaceholder' id='viz1754025440940' style='position: relative'><noscript><a href='#'><img alt='D15 NTSF3 ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D15NTSF3&#47;D15NTSF3&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D15NTSF3&#47;D15NTSF3' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D15NTSF3&#47;D15NTSF3&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1754025440940');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='1277px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div>
+    </div>
+
+    <div class="seccion" id="Bienes">
+        <h2 class="section-title">Participación ciudadana</h2>
+        <div class="tableau-section-horizontal">
+            <div class='tableauPlaceholder' id='viz1753294110813' style='position: relative'><noscript><a href='#'><img alt='D16 Espacios Form Parti ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D16EspaciosFormParti&#47;D16EspaciosFormParti&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D16EspaciosFormParti&#47;D16EspaciosFormParti' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D16EspaciosFormParti&#47;D16EspaciosFormParti&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753294110813');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='727px';}                     
+            var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+            </script> 
+        </div>
+    </div>
+
+
+
+    <div class="seccion" >
+        <h3>Percepción ciudadana de grupos o actores públicos</h3>
+        <div class="tableau-section">
+            <div class='tableauPlaceholder' id='viz1753297864202' style='position: relative'><noscript><a href='#'><img alt='D18 NB&amp;SPercep ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D18NBSPercep&#47;D18NBSPercep&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D18NBSPercep&#47;D18NBSPercep' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D18NBSPercep&#47;D18NBSPercep&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753297864202');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='627px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='627px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='1377px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+
+            </script> 
+        </div>
+    </div>
+
+    <div class="seccion">
+        <h3>Percepción de los ciudadanos acerca de su nivel de influencia, voz  y voto y la calidad del servicio que prestan las entidades públicas</h3>
+        <div class="tableau-section-mediano2">
+            <div class='tableauPlaceholder' id='viz1754027246495' style='position: relative'><noscript><a href='#'><img alt='D19 NB&amp;SPinflu ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D19NBSPinflu&#47;D19NBSPinflu&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D19NBSPinflu&#47;D19NBSPinflu' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D19NBSPinflu&#47;D19NBSPinflu&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' />
+            </object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1754027246495');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='1227px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> 
+        </div>
+    </div>
+
+    <div class="seccion" id="Circuitos">
+        <h2 class="section-title">Circuitos locales productivos</h2>
+        <div class="tableau-section-mediano">
+            <div class='tableauPlaceholder' id='viz1753302054031' style='position: relative'><noscript><a href='#'><img alt='D20 NCPS ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;59&#47;59DGM39TB&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;59DGM39TB' /> <param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;59&#47;59DGM39TB&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753302054031');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='1227px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> 
+        </div>
+    </div>
+
+    <div class="seccion" id="Bienestar">
+        <h2 class="section-title">Calidad de vida</h2>
+
+    </div>
+
+
+
+    <div class="seccion" id="Ingresosygastos">
+        <h3 class="section-title">Ingresos y gastos</h3>
+        <p>Ingresos, subsidios y gastos y su descomposición para 
+            cada una de los subgrupos muestrales según características del hogar o de sus jefes de hogar.</p> 
+        <div class="tableau-section">
+            <div class='tableauPlaceholder' id='viz1753313336485' style='position: relative'><noscript><a href='#'><img alt='D22 NPmonet ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D22NPmonet&#47;D22NPmonet&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D22NPmonet&#47;D22NPmonet' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D22NPmonet&#47;D22NPmonet&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753313336485');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='877px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div>
+    </div>
+
+
+    <div class="seccion">
+        <h2>Incidencia de pobreza monetaria</h2>
+        <div class="tableau-section-mediano">
+            <div class='tableauPlaceholder' id='viz1754161207944' style='position: relative'><noscript><a href='#'><img alt='D24 Pobrezahog ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D24Pobrezahog&#47;D24Pobrezahog&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D24Pobrezahog&#47;D24Pobrezahog' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D24Pobrezahog&#47;D24Pobrezahog&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1754161207944');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='727px';}                    
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div>
+    </div>
+
+    <div class="seccion" id="PobrezaSubjetiva">
+        <h2 class="section-title">Pobreza subjetiva</h2>
+        <div class="tableau-section-mediano">
+                <div class='tableauPlaceholder' id='viz1754162572825' style='position: relative'><noscript><a href='#'><img alt='D25 PSub ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D25PSub&#47;D25PSub&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D25PSub&#47;D25PSub' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D25PSub&#47;D25PSub&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                
+                <script type='text/javascript'>                    
+                var divElement = document.getElementById('viz1754162572825');                    
+                var vizElement = divElement.getElementsByTagName('object')[0];                    
+                if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='307px';} 
+                else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='307px';} 
+                else { vizElement.style.width='800px';vizElement.style.height='927px';}                     
+                var scriptElement = document.createElement('script');                    
+                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div>
+    </div>
+
+    <div class="seccion" id="IPM">
+        <h2 class="section-title">Pobreza multidimensional (IPM)</h2>
+        <p>El IPM involucra 15 indicadores agrupados en 5 dimensiones con igual ponderación. Así mismo, los indicadores dentro de cada dimensión y por tanto no pesan igual en el total. Así, un hogar se considera pobre multidimensionalmente cuando la suma de las ponderaciones de los indicadores en los que el hogar tiene privación supera el umbral 33,3% para pobreza multidimensional.</p>
+        
+        <img src="img/Imagen IPM por dimensiones.png" width="800" height="250 ">
+
+            
+    </div>
+
+    <div class="seccion">
+        <div class="tableau-section-mediano">
+            <div class='tableauPlaceholder' id='viz1754163584459' style='position: relative'><noscript><a href='#'><img alt='D26 NIPM ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D26NIPM&#47;D26NIPM&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D26NIPM&#47;D26NIPM' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D26NIPM&#47;D26NIPM&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1754163584459');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='727px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
+        </div>
+    </div>
+
+
+
+
+    <div class="seccion" id="InseguridadAlimentaria">
+        <h2 class="section-title">Inseguridad Alimentaria (escala FIES)</h2>
+            <p class="texto-italica-gris">“La Escala de Experiencia de Inseguridad Alimentaria (Food Insecurity Experience Scale, FIES) 
+            es una herramienta de medición del acceso a los alimentos en términos de cantidad y calidad, 
+            diseñada por la Organización de las Naciones Unidas para la Alimentación y la Agricultura, FAO.<br> 
+            A través de ocho preguntas, la escala recoge la experiencia de la situación de inseguridad alimentaria
+            de los hogares y proporciona una medición de su gravedad.” (DANE, 2023)</p>
+    
+     
+        <img src="img/1fies.png" width="550" height="160" >
+        <div class="texto-italica-gris">
+            <p>Teoría de respuesta al item. FAO. 2016. Métodos para la estimación de índices comparables de prevalencia de la inseguridad alimentaria experimentada por adultos en todo el mundo</p>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <h3>Experiencias individuales de inseguridad alimentaria</h3>         
+        <div class="tableau-section-mediano">
+            <div class='tableauPlaceholder' id='viz1754164225506' style='position: relative'><noscript><a href='#'><img alt='D28 NFIES x preg ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D28NFIESxpreg&#47;D28NFIESxpreg&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D28NFIESxpreg&#47;D28NFIESxpreg' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D28NFIESxpreg&#47;D28NFIESxpreg&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1754164225506');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='510px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div>
+    </div>
+
+
+    <div class="seccion">
+       <div class="tableau-section">
+            <div class='tableauPlaceholder' id='viz1754166317642' style='position: relative'><noscript><a href='#'><img alt='D29 NFIES2 preval ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D29NFIES2preval&#47;D29NFIES2preval&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D29NFIES2preval&#47;D29NFIES2preval' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D29NFIES2preval&#47;D29NFIES2preval&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1754166317642');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='727px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div>
+    </div>
+ 
+    <div class="seccion" id="IndiceConfianza">
+        <h2 class="section-title">Índice de confianza</h2>
+       <div class="tableau-section">
+           <div class='tableauPlaceholder' id='viz1754168437408' style='position: relative'><noscript><a href='#'><img alt='D30 Icsub ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D30Icsub&#47;D30Icsub&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D30Icsub&#47;D30Icsub' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D30Icsub&#47;D30Icsub&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' />
+        </object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1754168437408');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='527px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='727px';}                    
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> 
+        </div>
+    </div>
+
+    <div class="seccion" id="PerImpacto">
+        <h2 class="section-title">Percepción de Impacto sobre la calidad de vida</h2>
+        <div class="tableau-section-horizontal">
+            <div class='tableauPlaceholder' id='viz1754169667710' style='position: relative'><noscript><a href='#'><img alt='D31 ImpactoCV ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D31ImpactoCV&#47;D31ImpactoCV&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D31ImpactoCV&#47;D31ImpactoCV' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D31ImpactoCV&#47;D31ImpactoCV&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1754169667710');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='327px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='900px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> 
+        </div>
+    </div>
+ 
+    <div class="seccion">
+        <div class="tableau-section-mediano">
+            <div class='tableauPlaceholder' id='viz1753331666276' style='position: relative'><noscript><a href='#'><img alt='D32 N Impacto x actor ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D32NImpactoxactor&#47;D32NImpactoxactor&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D32NImpactoxactor&#47;D32NImpactoxactor' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D32NImpactoxactor&#47;D32NImpactoxactor&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753331666276');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='627px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='627px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='900px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <div class="tableau-section-mediano">
+            <div class='tableauPlaceholder' id='viz1753379711915' style='position: relative'><noscript><a href='#'><img alt='D33 N Impacto x FOC ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D33NImpactoxFOC&#47;D33NImpactoxFOC&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='FCGRC_LB6m2_D33NImpactoxFOC&#47;D33NImpactoxFOC' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;FC&#47;FCGRC_LB6m2_D33NImpactoxFOC&#47;D33NImpactoxFOC&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /><param name='filter' value='publish=yes' /></object></div>                
+            <script type='text/javascript'>                    
+            var divElement = document.getElementById('viz1753379711915');                    
+            var vizElement = divElement.getElementsByTagName('object')[0];                    
+            if ( divElement.offsetWidth > 800 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='800px';vizElement.style.height='427px';} 
+            else { vizElement.style.width='800px';vizElement.style.height='727px';}                     
+            var scriptElement = document.createElement('script');                    
+            scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+            vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script> 
+        </div>
+    </div>
+
+
+</div><!-- Container -->
+
+
+    <div class="footer">
+        <div class="footer-logo">
+            <img src="img/Logo FCGRC SIN FONDO.png" alt="Footer Logo">
+            </div>
+        <div class="footer-text">
+                &quot;Con el objetivo de promover el desarrollo territorial sostenible en las zonas de operación significativa del Grupo Agroindustrial Riopaila Castilla, nos enfocamos en el fortalecimiento del tejido social, la consolidación de los factores de desarrollo y la sostenibilidad de ecosistemas agroalimentarios y/o empresariales en los territorios para contribuir a mejorar las condiciones de vida y ampliar las oportunidades de acceso y goce efectivo de los derechos de las poblaciones en condición de vulnerabilidad.&quot;
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(event) {
+                    event.preventDefault(); // Evita el comportamiento predeterminado del enlace
+
+                    const parentLi = this.closest('li');
+
+                    // Cierra todos los otros submenús abiertos en el mismo nivel
+                    // Esto evita que múltiples submenús del mismo nivel se queden abiertos
+                    parentLi.parentNode.querySelectorAll('li.open').forEach(openLi => {
+                        if (openLi !== parentLi) {
+                            openLi.classList.remove('open');
+                        }
+                    });
+
+                    // Cierra todos los submenús anidados dentro del elemento que se está cerrando
+                    if (parentLi.classList.contains('open')) {
+                        parentLi.querySelectorAll('li.open').forEach(nestedOpenLi => {
+                            nestedOpenLi.classList.remove('open');
+                        });
+                    }
+
+                    // Alterna la clase 'open' en el <li> padre
+                    parentLi.classList.toggle('open');
+                });
+            });
+        });
+    </script>
+
+
+</body>
+</html>
